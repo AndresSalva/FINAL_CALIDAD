@@ -10,8 +10,8 @@ require 'capybara-screenshot/cucumber'
 require 'selenium-webdriver'
 
 
-ENV['USER'] ||= 'standard_user'
-ENV['PSW']  ||= 'secret_sauce'
+ENV['USER'] = 'standard_user'
+ENV['PSW']  = 'secret_sauce'
 
 Capybara.configure do |config|
   config.run_server = false
@@ -23,6 +23,7 @@ end
 Capybara.register_driver :selenium_chrome do |app|
   options = Selenium::WebDriver::Chrome::Options.new
   options.add_argument('--start-maximized')
+  options.binary = 'C:/Program Files/Google/Chrome/Application/chrome.exe'
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
 end
 
