@@ -26,5 +26,7 @@ Feature: Login en SauceDemo
       | usuario           | contraseña   | titulo     |
       | standard_user     | secret_sauce | Products   |
       | problem_user      | secret_sauce | Products   |
-      | visual_user  | secret_sauce | Products   |
+      | visual_user       | secret_sauce | Products   |
+      | error_user        | secret_sauce | Products   |
+      | performance_glitch_user | secret_sauce | Products   |
 
