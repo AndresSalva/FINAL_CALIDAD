@@ -1,9 +1,9 @@
-
-After do 
+After do
+  begin
     Capybara.current_session.driver.quit
+  rescue StandardError
+  end
 end
 
-Before '@maximize' do
-  page.driver.browser.manage.window.maximize
-end
+
 

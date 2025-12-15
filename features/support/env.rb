@@ -1,36 +1,30 @@
-begin require 'rspec/expectations'; rescue LoadError; require 'spec/expectations'; end
+begin
+  require 'rspec/expectations'
+rescue LoadError
+  require 'spec/expectations'
+end
+
 require 'capybara'
-require 'capybara/dsl'
 require 'capybara/cucumber'
 require 'capybara-screenshot/cucumber'
+require 'selenium-webdriver'
 
-#PTravel Settings
-ENV['USER']="Pepazo"
-ENV['PSW']="ILoveQA"
 
-Capybara.default_driver = :selenium
+ENV['USER'] = 'standard_user'
+ENV['PSW']  = 'secret_sauce'
 
-# Set the host the Capybara tests should be run against
-Capybara.app_host = ENV["CAPYBARA_HOST"]
-
-# Set the time (in seconds) Capybara should wait for elements to appear on the page
-Capybara.default_max_wait_time = 15
-Capybara.default_driver = :selenium
-Capybara.app_host = "https://cba.ucb.edu.bo/"
-
-class CapybaraDriverRegistrar
-  # register a Selenium driver for the given browser to run on the localhost
-  def self.register_selenium_driver(browser)
-    Capybara.register_driver :selenium do |app|
-      Capybara::Selenium::Driver.new(app, :browser => browser)
-    end
-  end
-
+Capybara.configure do |config|
+  config.run_server = false
+  config.default_max_wait_time = 15
+  config.app_host = 'https://www.saucedemo.com'
+  config.default_driver = :selenium_chrome
 end
-# Register various Selenium drivers
-#CapybaraDriverRegistrar.register_selenium_driver(:internet_explorer)
-#CapybaraDriverRegistrar.register_selenium_driver(:firefox)
-CapybaraDriverRegistrar.register_selenium_driver(:chrome)
-Capybara.run_server = false
-#World(Capybara)
 
+Capybara.register_driver :selenium_chrome do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+  options.add_argument('--start-maximized')
+  options.binary = 'C:/Program Files/Google/Chrome/Application/chrome.exe'
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+end
+
+World(RSpec::Matchers)
