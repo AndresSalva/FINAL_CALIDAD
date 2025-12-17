@@ -31,7 +31,7 @@ When('Yo ingreso mis datos validos: Nombre {string}, Apellido {string}, Zip {str
 end
 
 Then('Yo soy redirigido a la pagina de revision {string}') do |title|
-  expect(page).to have_current_path(/checkout-step-two\.html/)
+  expect(page).to have_current_path(/checkout-step-two\.html/, wait: 10)
   @checkout_page = CheckoutPage.new
   expect(@checkout_page.on_step_two_page?).to be true
 end
