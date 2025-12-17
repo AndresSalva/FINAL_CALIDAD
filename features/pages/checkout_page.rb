@@ -50,8 +50,8 @@ class CheckoutPage
   end
 
   def on_complete_page?
-    page.has_content?('Thank you for your order') || page.has_content?('CHECKOUT: COMPLETE!')
-    current_url.include?('checkout-complete.html')
+    (page.has_content?('Thank you for your order') || page.has_content?('CHECKOUT: COMPLETE!')) &&
+      current_url.include?('checkout-complete.html')
   end
 
   def back_home
